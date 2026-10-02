@@ -25,10 +25,13 @@ async function registerUserController(req: Request, res: Response) {
         return res.status(201).json(sanitizeUser(newUser));
     }
     catch (error) {
-        if(error instanceof Error && error.message === "User already exists"){
+        console.error("REGISTER USER ERROR:", error);
+
+        if (error instanceof Error && error.message === "User already exists") {
             return res.status(409).json({ message: "User already Exists" });
         }
-        return res.status(500).json({ message:"Internal server error" });
+
+        return res.status(500).json({ message: "Internal server error" });
     }
 }
 
