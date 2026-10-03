@@ -20,6 +20,12 @@ async function createOrderController(req: Request, res: Response) {
     } catch (error) {
         console.error('CREATE ORDER ERROR',error);
 
+        if(error instanceof Error && error.message === "User not found"){
+            return res.status(404).json({
+                message:'User not found'
+            })
+        }
+
         return res.status(500).json({
             message:'Internal server error'
         })
