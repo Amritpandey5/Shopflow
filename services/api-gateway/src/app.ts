@@ -14,6 +14,16 @@ app.use(
         },
     })
 )
+app.use(
+    "/orders",
+    createProxyMiddleware({
+        target: "http://localhost:3002",
+        changeOrigin: true,
+        pathRewrite: {
+            "^/": "/orders/",
+        },
+    })
+);
 
 app.use(express.json());
 
